@@ -1,11 +1,29 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import AntDesign from '@expo/vector-icons/AntDesign';
+import React from "react";
+import { TouchableOpacity, Text, View } from "react-native";
 import { router } from "expo-router";
 
-export default function PlayButton(){
-    return (
-        <TouchableOpacity className="w-[50%] px-8 py-2 mt-8 mb-36 rounded-lg items-center justify-center bg-purple-600" onPress={() => router.push('/quiz')}>
-            <Text className="text-white px-4 py-2">Jogar</Text>
-        </TouchableOpacity>
-    )
+interface PlayButtonProps {
+  nivel: number;
+  userId: string;
+}
+
+export default function PlayButton({ nivel, userId }: PlayButtonProps) {
+  const handlePlay = () => {
+    router.push({
+      pathname: "/quiz",
+      params: {
+        nivel: nivel.toString(),
+        userId: userId
+      },
+    });
+  };
+
+  return (
+    <TouchableOpacity
+      onPress={handlePlay}
+      className="bg-vibrant-green px-8 py-4 mb-20 rounded-full"
+    >
+      <Text className="text-white text-lg font-bold">Jogar (Nível {nivel})</Text>
+    </TouchableOpacity>
+  );
 }

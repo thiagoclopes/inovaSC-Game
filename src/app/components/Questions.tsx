@@ -37,11 +37,11 @@ export default function Question({ question, options, onAnswer, onOptionSelected
 				<TouchableOpacity
 					key={index}
 					className={`p-3 rounded-lg mb-2 flex flex-row items-center gap-2 ${
-						selectedOption === option && !isTimedOut ? 'bg-blue-400' : isTimedOut ? 'bg-gray-300' : 'bg-blue-200'
+						selectedOption === option && !isTimedOut ? 'bg-blue-400' : isTimedOut ? 'bg-gray-300' : 'bg-soft-brown/50'
 					  }`}
 					onPress={() => handlePress(option)}
 				>
-					<View className={`flex items-center justify-center w-8 h-8 border ${selectedOption == option ? 'bg-blue-100' : 'bg-white'}`}>
+					<View className={`flex items-center justify-center w-8 h-8 border ${selectedOption == option ? 'bg-blue-50/50' : 'bg-white'}`}>
 						<Text className='font-bold'>
 							{labels[index]}
 						</Text>
@@ -58,7 +58,7 @@ export default function Question({ question, options, onAnswer, onOptionSelected
 			))}
 
 			<TouchableOpacity
-				className={`mt-4 p-3 rounded-lg ${isTimedOut || selectedOption ? 'bg-red-950' : 'bg-gray-400'}`}
+				className={`mt-4 p-3 rounded-lg ${isTimedOut || selectedOption ? 'bg-secondary-red' : 'bg-gray-400'}`}
 				onPress={handleSubmit}
 				disabled={!isTimedOut && !selectedOption}
 			>
