@@ -1,6 +1,6 @@
 import { Stack, useRouter, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
-import { View, Text, Alert } from "react-native";
+import { View, Text, Alert, Image, TouchableOpacity } from "react-native";
 import Question from "./components/Questions";
 import Timer, { TimerProps } from "./components/Quiz/Timer";
 import Header from "./components/Quiz/Header";
@@ -27,6 +27,7 @@ export default function QuizScreen() {
   const { nivel, userId } = useLocalSearchParams();
   const nivelNumerico = parseInt(nivel as string, 10) as 1 | 2 | 3;
   const questions: Question[] = questionSets[nivelNumerico] || questionsLevel1;
+  const [showResultModal, setShowResultModal] = useState(false);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
@@ -59,14 +60,20 @@ export default function QuizScreen() {
     }
   };
 
+  useEffect(() => {
+    console.log("Score:", score);
+  }, [score]);
+
   const onTimeOut = () => {
-    if (selectedOption) {
-      handleAnswer(selectedOption);
-    } else {
-      setIsTimedOut(true);
-      setScore((prev) => prev - 2);
-      setAnswerHistory((prev) => [...prev, false]);
-      setLives((prev) => prev - 1);
+    if(!quizFinished) {
+      if (selectedOption) {
+        handleAnswer(selectedOption);
+      } else {
+        setIsTimedOut(true);
+        setScore((prev) => prev - 2);
+        setAnswerHistory((prev) => [...prev, false]);
+        setLives((prev) => prev - 1);
+      }
     }
   };
 
@@ -111,18 +118,10 @@ export default function QuizScreen() {
   };
 
   useEffect(() => {
-    if (lives <= 0 || quizFinished) {
+	if (lives <= 0 || quizFinished) {
       setQuizFinished(true);
       updateUserData().then(() => {
-        setTimeout(() => {
-          router.replace({
-            pathname: "/result",
-            params: {
-              score: score.toString(),
-              lives: lives.toString(),
-            },
-          });
-        }, 100);
+        setShowResultModal(true);
       });
     }
   }, [lives, quizFinished, score, router, nivelNumerico, userId]);
@@ -156,6 +155,30 @@ export default function QuizScreen() {
         isTimedOut={isTimedOut}
         onNext={handleNext}
       />
+
+      {showResultModal && (
+        <View className="absolute inset-0 bg-black/60 justify-center items-center p-4 z-50">
+          <View className="bg-white rounded-2xl p-8 mx-6 w-full max-w-md items-center">
+            <Text className="text-2xl font-bold text-center mb-4">Missão cumprida!</Text>
+            <Text className="text-lg mb-2 text-center">Você finalizou o quiz com:</Text>
+            <Text className="text-4xl font-extrabold text-green-600 mb-4">{score} pontos</Text>
+            <Image
+              source={require("../assets/congratulations.png")}
+              className="h-64 w-full"
+              resizeMode="contain"
+            />
+
+            <TouchableOpacity
+              onPress={() => router.replace({ pathname: "/home", params: { id: userId } })}
+              className="bg-green-500 px-6 py-3 rounded-full mt-6"
+            >
+              <Text className="text-white text-lg font-bold">
+                Voltar para o início
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
     </View>
   );
 }

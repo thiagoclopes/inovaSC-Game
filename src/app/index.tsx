@@ -16,17 +16,14 @@ export default function IndexScreen() {
     setLoading(true);
 
     try {
-      // 1. Verifica se o usuário já existe
       const getResponse = await fetch(`${API_BASE_URL}/usuarios?nome=${encodeURIComponent(nome)}`);
       const usuariosExistentes = await getResponse.json();
 
       let usuario;
 
       if (usuariosExistentes.length > 0) {
-        // 2. Usuário já existe
         usuario = usuariosExistentes[0];
       } else {
-        // 3. Criar novo usuário
         const postResponse = await fetch(`${API_BASE_URL}/usuarios`, {
           method: 'POST',
           headers: {
@@ -48,7 +45,6 @@ export default function IndexScreen() {
         usuario = await postResponse.json();
       }
 
-      // 4. Redirecionar para /home com o ID do usuário
       router.push({
         pathname: '/home',
         params: {

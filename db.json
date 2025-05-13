@@ -1,44 +1,12 @@
 {
   "usuarios": [
     {
-      "id": "302a",
+      "id": "50bb",
       "nome": "Thiago",
-      "pontosNvl1": 0,
+      "pontosNvl1": 100,
       "pontosNvl2": 0,
-      "pontosNvl3": 0,
-      "nivel": 1
-    },
-    {
-      "id": "2c27",
-      "nome": "Thiago Lopes",
-      "pontosNvl1": 90,
-      "pontosNvl2": 60,
       "pontosNvl3": 0,
       "nivel": 2
-    },
-    {
-      "id": "4df6",
-      "nome": "Thiago ",
-      "pontosNvl1": 0,
-      "pontosNvl2": 0,
-      "pontosNvl3": 0,
-      "nivel": 1
-    },
-    {
-      "id": "5fe9",
-      "nome": "Leo",
-      "pontosNvl1": 0,
-      "pontosNvl2": 0,
-      "pontosNvl3": 0,
-      "nivel": 1
-    },
-    {
-      "id": "1165",
-      "nome": "Ricardo",
-      "pontosNvl1": 0,
-      "pontosNvl2": 0,
-      "pontosNvl3": 0,
-      "nivel": 1
     }
   ]
 }
