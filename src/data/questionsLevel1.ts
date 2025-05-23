@@ -24,12 +24,12 @@ export const questionsLevel1: Question[] = [
         text: "Em casos de ingestão de substância corrosiva, como por exemplo uma base, o que deve-se fazer?",
         options: [
             "Neutralizar com um ácido.",
-            "Lavar com água corrente.",
+            "Ligar para o SAMU.",
             "Forçar o vômito.",
             "Ingerir leite."
         ],
-        correctAnswer: "Lavar com água corrente.",
-        explanation: "Lavar com água corrente dilui a substância corrosiva e reduz o dano aos tecidos. Neutralizar com ácido ou forçar vômito pode agravar a lesão."
+        correctAnswer: "Ligar para o SAMU.",
+        explanation: "Em casos de ingestão de substâncias corrosivas, a prioridade é buscar ajuda médica imediata. Não se deve tentar neutralizar a substância com produtos químicos ou provocar vômito, pois isso pode agravar as lesões internas. A recomendação é acionar o SAMU (192) para receber orientações adequadas e encaminhamento urgente ao hospital."
     },
     {
         id: 3,
